@@ -1,4 +1,4 @@
-name: SaathiCare Backend Verification
+name: SaathiCare Test Verification
 
 on:
   push:
@@ -9,7 +9,7 @@ on:
 
 jobs:
   verify:
-    name: Verify Backend Test Reports
+    name: Verify Test Reports
     runs-on: ubuntu-latest
 
     steps:
@@ -28,7 +28,13 @@ jobs:
 
       - name: Publish Test Results to Job Summary
         run: |
-          python scripts/publish_backend_results.py
+          python scripts/publish_results.py
+
+      - name: Upload Frontend Test Report
+        uses: actions/upload-artifact@v4
+        with:
+          name: Frontend-Test-Report
+          path: "REPORTS/frontend/frontend saathi care result.xlsx"
 
       - name: Upload Backend Test Report
         uses: actions/upload-artifact@v4
